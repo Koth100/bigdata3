@@ -20,7 +20,7 @@ import kr.mem.pojo.MemberListController;
 public class MemberFrontController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("euc-kr");
-		// 1.¾î¶²¿äÃ»ÀÎÁö ÆÄ¾ÇÇÏ´Â ÀÛ¾÷ -> *.do
+		// 1.ìœ¼ì•„ì•„ì•„ã…
 		String reqUrl=request.getRequestURI();
 //		System.out.println(reqUrl);
 		String ctxPath=request.getContextPath();
@@ -29,8 +29,8 @@ public class MemberFrontController extends HttpServlet {
 		System.out.println(command);
 		HandlerMapping mapping= new HandlerMapping();
 		Controller controller = null;
-		//°¢ ¿äÃ»¿¡ µû¶ó Ã³¸®ÇÏ±â
-		//ÇÚµé·¯ ¸ÅÇÎ
+		//ìœ¼ì•„ì•„ì•„
+		//ìœ¼ì•„ì•„ì•„ì•„
 //		MemberDAO dao = new MemberDAO();
 		controller = mapping.getController(command);
 		String nextView = controller.requestHandle(request, response);
@@ -51,11 +51,11 @@ public class MemberFrontController extends HttpServlet {
 		//---------------------
 		if(nextView!=null) {
 			if(nextView.indexOf("redirect:")!=-1) {
-				//indexOf -> ÇØ´ç ¹®ÀÚ¿­ÀÌ Á¸ÀçÇÏ¸é ÇØ´ç ÀÎµ¦½º ¹ÝÈ¯ ¾ø´Ù¸é -1 ¹ÝÈ¯
+				//indexOf -> ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ø´ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½Ù¸ï¿½ -1 ï¿½ï¿½È¯
 				String[] sp = nextView.split(":"); //sp[0]:sp[1]
 				response.sendRedirect(sp[1]);
 			}else {
-				//Æ÷¿öµùÀº ±âÁ¸ ÄÜÅØ½ºÆ® ¸íÄª¿¡¼­ ÀÌ·ç¾îÁö±â ¶§¹®¿¡ mvc1À» ¾È ºÙÇôÁàµµ µÈ´Ù.
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½Æ® ï¿½ï¿½Äªï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ mvc1ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½àµµ ï¿½È´ï¿½.
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/"+nextView);
 				rd.forward(request, response);
 			}
